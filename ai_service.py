@@ -18,56 +18,59 @@ def generate_feedback(data: dict):
     metrics = data.get("metrics")
 
     prompt = f"""
-    You are an AI recruiter evaluating a developer GitHub portfolio.
+You are a senior engineering recruiter.
 
-    Using the metrics below:
-    {metrics}
+Evaluate the GitHub profile using the provided metrics.
 
-    Evaluate based on:
-    - Engineering depth
-    - Documentation quality
-    - Consistency of contributions
-    - Real-world project impact
+Metrics:
+{metrics}
 
-    Return STRICT JSON ONLY in this format:
+Return STRICT JSON ONLY in this structure:
 
-    {{
-      "portfolioScore": "<score summary>",
-      "keyStrengths": [
-        "strength1",
-        "strength2",
-        "strength3"
-      ],
-      "redFlags": [
-        "flag1",
-        "flag2"
-      ],
-      "actionableSuggestions": [
-        "suggestion1",
-        "suggestion2",
-        "suggestion3"
-      ],
-      "hiringSignal": "<Strong / Moderate / Weak>",
-    }}
-    """
+{{
+  "profileStrength": "Weak / Average / Strong",
+  "recruiterFirstNotice": [
+    "point 1",
+    "point 2"
+  ],
+  "keyStrengths": [
+    "strength 1",
+    "strength 2"
+  ],
+  "reposToImprove": [
+    "repo1",
+    "repo2"
+  ],
+  "howToImproveProjects": [
+    "improvement 1",
+    "improvement 2"
+  ],
+  "nextSteps": [
+    "next step 1",
+    "next step 2",
+    "next step 3"
+  ],
+  "hiringSignal": "Strong Hire / Hire / Consider / Weak"
+}}
+
+Keep responses concise, recruiter-focused, and actionable.
+"""
 
     url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={GEMINI_API_KEY}"
 
     response = requests.post(
         url,
         json={
-            "contents": [
-                {"parts": [{"text": prompt}]}
-            ]
+            "contents": [{"parts": [{"text": prompt}]}]
         }
     )
 
     result = response.json()
 
-    # Reliability guard
     if "candidates" not in result:
         return {"feedback": f"Gemini API Error: {result}"}
 
     ai_text = result["candidates"][0]["content"]["parts"][0]["text"]
 
     return {"feedback": ai_text}
+

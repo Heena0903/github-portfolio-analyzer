@@ -8,7 +8,7 @@ router.post("/analyze", async (req, res) => {
   try {
     const { githubUrl } = req.body;
 
-    const username = githubUrl.split("github.com/")[1];
+    const username = githubUrl.split("github.com/")[1].replace("/", "");
 
     // Fetch GitHub profile
     const userResponse = await axios.get(
@@ -20,8 +20,8 @@ router.post("/analyze", async (req, res) => {
       `https://api.github.com/users/${username}/repos`,
     );
 
-    // Calculate score
-    const scoring = calculateScore(repoResponse.data);
+    // Calculate score (FIXED)
+    const scoring = await calculateScore(username, repoResponse.data);
 
     // Call Python AI service
     const aiResponse = await axios.post(
