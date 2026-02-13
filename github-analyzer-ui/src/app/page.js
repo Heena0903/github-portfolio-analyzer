@@ -11,9 +11,12 @@ export default function Home() {
   const analyzeProfile = async () => {
     setLoading(true);
 
-    const res = await axios.post("http://localhost:5000/api/analyze", {
-      githubUrl,
-    });
+    const res = await axios.post(
+      "https://github-portfolio-analyzer-vnen.onrender.com",
+      {
+        githubUrl,
+      },
+    );
 
     setResult(res.data);
     setLoading(false);
