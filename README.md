@@ -1,110 +1,143 @@
 GitHub Portfolio Analyzer — AI Recruiter Evaluation System
-Problem
+Problem Statement
 
-Recruiters review hundreds of GitHub profiles daily but evaluating engineering depth, consistency, documentation quality, and project impact manually is time-consuming and inconsistent.
-Students often do not know:
+Recruiters review hundreds of GitHub profiles daily, but evaluating engineering depth, consistency, documentation quality, and project impact manually is:
 
-How strong their GitHub portfolio is
+Time-consuming and resource-intensive
 
-What recruiters notice first
+Inconsistent across different reviewers
 
-Which repositories need improvement
+Subjective without standardized evaluation criteria
+
+Student Pain Points
+
+Students often struggle to understand:
+
+How strong their GitHub portfolio actually is
+
+What recruiters notice first when reviewing profiles
+
+Which repositories need immediate improvement
 
 What concrete steps will make them recruiter-ready
 
-Solution
+Solution Overview
 
-GitHub Portfolio Analyzer is an AI-powered system that evaluates GitHub profiles using recruiter-style signals and generates:
+GitHub Portfolio Analyzer is an AI-powered system that evaluates GitHub profiles using recruiter-style engineering signals and generates structured feedback reports.
 
-Portfolio Score (0-100)
+Core Deliverables
 
-Engineering signal breakdown
+Portfolio Score (0–100 scale)
 
-Weak repositories detection
+Engineering Signal Breakdown
 
-Recruiter-style hiring signal
+Weak Repository Detection with improvement suggestions
 
-Actionable improvement steps
+Recruiter-style Hiring Signal
 
-The system provides structured, real-time evaluation using GitHub public APIs and AI feedback generation.
+Actionable Improvement Steps for portfolio optimization
+
+The system combines GitHub public data with AI-generated recruiter feedback to produce real-time structured evaluations.
 
 Key Features
-1. Automated Portfolio Evaluation
+🔍 Automated Portfolio Evaluation
 
-Accepts a GitHub profile URL and analyzes repositories using objective scoring metrics:
+Accepts GitHub profile URLs and evaluates repositories using objective scoring metrics:
 
-Documentation quality
+Documentation Quality — README completeness, project descriptions
 
-Repository structure
+Repository Structure — code organization, file structure
 
-Activity consistency
+Activity Consistency — commit frequency, maintenance patterns
 
-Project impact (stars)
+Project Impact — stars, forks, engagement signals
 
-Engineering signals
+Engineering Signals — technology diversity and development depth
 
-2. Recruiter-Style Hiring Signal
+🎯 Recruiter-Style Hiring Signal
 
-Generates recruiter-aligned evaluation:
+Generates recruiter-aligned evaluation insights:
 
-Hiring recommendation (Strong Hire / Hire / Consider / Weak)
+Hiring Recommendation (Strong Hire / Hire / Consider / Weak)
 
-Strength signals recruiters notice first
+Key Strength Signals recruiters notice first
 
-Repositories to improve or archive
+Repository Prioritization — projects to improve or archive
 
-Next-step actions to become recruiter-ready
+Clear next-step actions to become recruiter-ready
 
-3. Structured Portfolio Score
+📊 Structured Portfolio Score
 
-Clear scoring dashboard:
+Interactive evaluation dashboard includes:
 
-Total portfolio score
+Total Portfolio Score
 
-Score breakdown
+Category-wise signal breakdown
 
 Weak repository detection
 
-Improvement priorities
+Ranked improvement priorities
 
-4. Real-Time Feedback Engine
+⚡ Real-Time Feedback Engine
 
-Backend combines:
+Backend system integrates:
 
 GitHub API data extraction
 
-Engineering signal scoring logic
+Engineering signal scoring algorithms
 
 AI recruiter-style evaluation
 
-Structured feedback output
+Structured actionable feedback output
 
 Tech Stack
-
 Frontend
 
-Next.js
+Next.js (React)
 
-React
+Axios (API communication)
 
-Axios
+Responsive UI design
+
+React Hooks state management
 
 Backend
 
-Node.js
+Node.js + Express.js
 
-Express.js
+GitHub REST API integration
 
-GitHub REST API
+Real-time scoring pipeline
 
 AI Evaluation Service
 
 FastAPI (Python)
 
-LLM-based recruiter feedback engine
+LLM-based recruiter feedback generation
 
-Deployment
+Structured evaluation logic
 
-Frontend: Vercel
+Deployment Architecture
+Production Environment
 
-Backend: Render
+Frontend Hosting: Vercel
+
+Backend Hosting: Render
+
+AI Service: Render / Cloud deployment
+
+Caching: Redis (optional for GitHub API optimization)
+
+Getting Started
+Prerequisites
+
+Node.js (v18+)
+
+Python (v3.9+)
+
+Git
+
+GitHub Personal Access Token
+
+Built with ❤️ for developers who want recruiter-ready GitHub portfolios. 
+<img width="1860" height="926" alt="Screenshot 2026-02-13 233654" src="https://github.com/user-attachments/assets/e3b5d4bc-9599-4ebd-8010-cf6425e8a283" />
