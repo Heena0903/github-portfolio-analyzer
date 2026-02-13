@@ -25,7 +25,7 @@ router.post("/analyze", async (req, res) => {
 
     // Call Python AI service
     const aiResponse = await axios.post(
-      "http://localhost:8000/generate-feedback",
+      "https://github-ai-service.onrender.com/generate-feedback",
       { metrics: scoring },
     );
 
