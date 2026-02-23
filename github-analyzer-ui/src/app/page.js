@@ -9,17 +9,20 @@ export default function Home() {
   const [loading, setLoading] = useState(false);
 
   const analyzeProfile = async () => {
-    setLoading(true);
+    try {
+      setLoading(true);
 
-    const res = await axios.post(
-      "https://github-portfolio-analyzer-vnen.onrender.com",
-      {
-        githubUrl,
-      },
-    );
+      const res = await axios.post(
+        "https://github-portfolio-analyzer-vnen.onrender.com/api/analyze",
+        { githubUrl },
+      );
 
-    setResult(res.data);
-    setLoading(false);
+      setResult(res.data);
+    } catch (err) {
+      alert("Error analyzing profile");
+    } finally {
+      setLoading(false);
+    }
   };
 
   let feedback = null;
@@ -44,11 +47,10 @@ export default function Home() {
         Analyze
       </button>
 
-      {loading && <p style={{ marginTop: 20 }}>Analyzing profile...</p>}
+      {loading && <p>Analyzing...</p>}
 
       {result && (
         <div style={{ marginTop: 40 }}>
-          {/* HIRING SIGNAL BANNER */}
           {feedback && (
             <div
               style={{
@@ -67,17 +69,10 @@ export default function Home() {
             </div>
           )}
 
-          {/* SCORE */}
           <div style={card}>
-            <h2>
-              Portfolio Score:
-              <span style={{ color: "#2563eb", marginLeft: 10 }}>
-                {result.score.totalScore}
-              </span>
-            </h2>
+            <h2>Portfolio Score: {result.score.totalScore}</h2>
           </div>
 
-          {/* BREAKDOWN */}
           <div style={card}>
             <h3>Score Breakdown</h3>
             {Object.entries(result.score.breakdown).map(([k, v]) => (
@@ -87,7 +82,6 @@ export default function Home() {
             ))}
           </div>
 
-          {/* WEAK REPOS */}
           <div style={card}>
             <h3>Repositories to Improve</h3>
             <ul>
@@ -99,7 +93,6 @@ export default function Home() {
             </ul>
           </div>
 
-          {/* AI FEEDBACK */}
           {feedback && (
             <div style={card}>
               <h3>Key Strengths</h3>
@@ -133,7 +126,7 @@ const page = {
 const banner = {
   padding: 18,
   borderRadius: 12,
-  fontSize: 22,
+  fontSize: 20,
   fontWeight: "bold",
   textAlign: "center",
   marginBottom: 24,
@@ -145,7 +138,6 @@ const card = {
   padding: 24,
   borderRadius: 14,
   marginBottom: 24,
-  boxShadow: "0 4px 14px rgba(0,0,0,0.1)",
 };
 
 const input = {

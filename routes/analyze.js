@@ -8,34 +8,35 @@ router.post("/analyze", async (req, res) => {
   try {
     const { githubUrl } = req.body;
 
-    const username = githubUrl.split("github.com/")[1].replace("/", "");
+    if (!githubUrl || !githubUrl.includes("github.com")) {
+      return res.status(400).json({ message: "Invalid GitHub URL" });
+    }
 
-    // Fetch GitHub profile
+    const username = githubUrl.split("github.com/")[1].replace("/", "").trim();
+
+    // Fetch profile
     const userResponse = await axios.get(
       `https://api.github.com/users/${username}`,
     );
 
-    // Fetch repositories
+    // Fetch repos
     const repoResponse = await axios.get(
-      `https://api.github.com/users/${username}/repos`,
+      `https://api.github.com/users/${username}/repos?per_page=100`,
     );
 
-    // Calculate score (FIXED)
+    // Calculate engineering score
     const scoring = await calculateScore(username, repoResponse.data);
 
-    // Call Python AI service
+    // Call AI FastAPI service
     const aiResponse = await axios.post(
       "https://github-ai-service.onrender.com/generate-feedback",
       { metrics: scoring },
     );
 
-    const aiFeedback = aiResponse.data.feedback;
-
     res.json({
       user: userResponse.data,
-      repos: repoResponse.data,
       score: scoring,
-      aiFeedback: aiFeedback,
+      aiFeedback: aiResponse.data.feedback,
     });
   } catch (error) {
     console.error(error.response?.data || error.message);

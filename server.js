@@ -5,6 +5,7 @@ const analyzeRoute = require("./routes/analyze");
 
 const app = express();
 
+// CORS (allow Vercel frontend)
 app.use(
   cors({
     origin: "*",
@@ -15,10 +16,12 @@ app.use(
 
 app.use(express.json());
 
+// Health check route
 app.get("/", (req, res) => {
-  res.send("Backend running successfully 🚀");
+  res.send("GitHub Portfolio Analyzer Backend Running 🚀");
 });
 
+// API route
 app.use("/api", analyzeRoute);
 
 const PORT = process.env.PORT || 5000;
